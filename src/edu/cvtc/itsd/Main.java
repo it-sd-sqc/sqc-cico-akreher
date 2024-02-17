@@ -39,28 +39,31 @@ public class Main {
 
     @Override
     public void insertString(FilterBypass fb, int offset, String stringToAdd, AttributeSet attr)
-        throws BadLocationException
-    {
-      if (fb.getDocument() != null) {
-        super.insertString(fb, offset, stringToAdd, attr);
-      }
-      else {
-        Toolkit.getDefaultToolkit().beep();
-      }
-    }
+        throws BadLocationException {
+
+
+        if (fb.getDocument() != null && fb.getDocument().getLength() == MAX_LENGTH) {
+            super.insertString(fb, offset, stringToAdd, attr);
+          } else {
+            Toolkit.getDefaultToolkit().beep();
+          }
+        }
+
+
 
     @Override
     public void replace(FilterBypass fb, int offset, int lengthToDelete, String stringToAdd, AttributeSet attr)
-        throws BadLocationException
-    {
-      if (fb.getDocument() != null) {
+        throws BadLocationException {
+
+      if (fb.getDocument() != null ) {
         super.replace(fb, offset, lengthToDelete, stringToAdd, attr);
-      }
-      else {
+      } else {
         Toolkit.getDefaultToolkit().beep();
       }
+
     }
   }
+
 
   // Lookup the card information after button press ///////////////////////////
   public static class Update implements ActionListener {
@@ -346,7 +349,7 @@ public class Main {
 
       // 00000000 is guaranteed valid; create if needed.
       command.executeUpdate("INSERT INTO members (name, card, is_checked_in) SELECT 'Developer', '00000000', 0 WHERE NOT EXISTS (SELECT name, card, is_checked_in FROM members WHERE card = '00000000')");
-
+      command.executeUpdate("INSERT INTO members (name, card, is_checked_in) SELECT 'Developer', '12345678', 0 WHERE NOT EXISTS (SELECT name, card, is_checked_in FROM members WHERE card = '12345678')");
       // Create parameterized SQL statements.
       statementQueryCard = db.prepareStatement("SELECT id, name, is_checked_in FROM members WHERE card = ? LIMIT 1");
       statementUpdateMember = db.prepareStatement("UPDATE members SET is_checked_in = ? WHERE id = ?");

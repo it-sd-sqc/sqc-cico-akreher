@@ -76,6 +76,6 @@ Use `./build.sh` to build CiCo and `./run.sh` to run it if using the command lin
 2. Enter 12345678910 and click Update.
 
 ## Expected Results
-* Should display that there are too many digits. 
+* Should display that there are too many digits.
 
 
