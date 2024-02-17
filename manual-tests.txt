@@ -62,3 +62,20 @@ Use `./build.sh` to build CiCo and `./run.sh` to run it if using the command lin
 * Should display "Developer" for the user name.
 
 
+# Module 4 : Filtering Numbers vs Letters in Card Field
+## Test steps
+1. Build and run Cico.
+2. Enter abcdefg and click Update.
+
+## Expected results
+* Should display nothing and ignore the letters.
+
+## Module 4: Test for Limited Number of Digits
+##Test steps
+1. Build and run Cico.
+2. Enter 12345678910 and click Update.
+
+## Expected Results
+* Should display that there are too many digits. 
+
+
