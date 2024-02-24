@@ -70,7 +70,7 @@ Use `./build.sh` to build CiCo and `./run.sh` to run it if using the command lin
 ## Expected results
 * Should display nothing and ignore the letters.
 
-## Module 4: Test for Limited Number of Digits
+## Module 4: Tests for Limited Number of Digits
 ##Test steps
 1. Build and run Cico.
 2. Enter 12345678910 and click Update.
