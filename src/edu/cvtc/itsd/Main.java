@@ -12,6 +12,8 @@ import javax.swing.text.*;
 
 // CiCo application's primary class ///////////////////////////////////////////
 public class Main {
+
+
   // Constants ////////////////////////////////////////////////////////////////
   // Current application version.
   private static final int VERSION = 100;
@@ -39,28 +41,32 @@ public class Main {
 
     @Override
     public void insertString(FilterBypass fb, int offset, String stringToAdd, AttributeSet attr)
-        throws BadLocationException
-    {
-      if (fb.getDocument() != null) {
-        super.insertString(fb, offset, stringToAdd, attr);
-      }
-      else {
-        Toolkit.getDefaultToolkit().beep();
-      }
-    }
+        throws BadLocationException {
+
+
+        if (fb.getDocument() != null && fb.getDocument().getLength() == MAX_LENGTH) {
+            super.insertString(fb, offset, stringToAdd, attr);
+          } else {
+            Toolkit.getDefaultToolkit().beep();
+          }
+        }
+
+
 
     @Override
     public void replace(FilterBypass fb, int offset, int lengthToDelete, String stringToAdd, AttributeSet attr)
-        throws BadLocationException
-    {
-      if (fb.getDocument() != null) {
+        throws BadLocationException {
+
+      if (fb.getDocument() != null && fb.getDocument().getLength() <= MAX_LENGTH -1) {
         super.replace(fb, offset, lengthToDelete, stringToAdd, attr);
+        } else {
+          Toolkit.getDefaultToolkit().beep();
       }
-      else {
-        Toolkit.getDefaultToolkit().beep();
-      }
+
     }
   }
+
+
 
   // Lookup the card information after button press ///////////////////////////
   public static class Update implements ActionListener {
@@ -74,6 +80,7 @@ public class Main {
     public void actionPerformed(ActionEvent evt) {
       Main.doneProcessing();
     }
+
   }
 
   // Revert to the main panel after time has passed ///////////////////////////
@@ -83,8 +90,12 @@ public class Main {
     }
   }
 
+
+
+
   // Called when closing the application //////////////////////////////////////
   public static class OnShutdown implements Runnable {
+
     public void run() {
       try {
         statementQueryCard.close();
@@ -92,8 +103,7 @@ public class Main {
         statementUpdateLog.close();
         db.close();
         System.out.println("Clean shutdown");
-      }
-      catch (SQLException e) {
+      } catch (SQLException e) {
         System.err.println(e.getMessage());
       }
     }
@@ -346,7 +356,7 @@ public class Main {
 
       // 00000000 is guaranteed valid; create if needed.
       command.executeUpdate("INSERT INTO members (name, card, is_checked_in) SELECT 'Developer', '00000000', 0 WHERE NOT EXISTS (SELECT name, card, is_checked_in FROM members WHERE card = '00000000')");
-
+      command.executeUpdate("INSERT INTO members (name, card, is_checked_in) SELECT 'Developer', '12345678', 0 WHERE NOT EXISTS (SELECT name, card, is_checked_in FROM members WHERE card = '12345678')");
       // Create parameterized SQL statements.
       statementQueryCard = db.prepareStatement("SELECT id, name, is_checked_in FROM members WHERE card = ? LIMIT 1");
       statementUpdateMember = db.prepareStatement("UPDATE members SET is_checked_in = ? WHERE id = ?");
@@ -364,5 +374,7 @@ public class Main {
     frame.pack();
     frame.setLocationRelativeTo(null);
     frame.setVisible(true);
+    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
   }
 }
