@@ -12,6 +12,8 @@ import javax.swing.text.*;
 
 // CiCo application's primary class ///////////////////////////////////////////
 public class Main {
+
+
   // Constants ////////////////////////////////////////////////////////////////
   // Current application version.
   private static final int VERSION = 100;
@@ -65,6 +67,7 @@ public class Main {
   }
 
 
+
   // Lookup the card information after button press ///////////////////////////
   public static class Update implements ActionListener {
     public void actionPerformed(ActionEvent evt) {
@@ -77,6 +80,7 @@ public class Main {
     public void actionPerformed(ActionEvent evt) {
       Main.doneProcessing();
     }
+
   }
 
   // Revert to the main panel after time has passed ///////////////////////////
@@ -86,8 +90,12 @@ public class Main {
     }
   }
 
+
+
+
   // Called when closing the application //////////////////////////////////////
   public static class OnShutdown implements Runnable {
+
     public void run() {
       try {
         statementQueryCard.close();
@@ -95,8 +103,7 @@ public class Main {
         statementUpdateLog.close();
         db.close();
         System.out.println("Clean shutdown");
-      }
-      catch (SQLException e) {
+      } catch (SQLException e) {
         System.err.println(e.getMessage());
       }
     }
@@ -367,5 +374,7 @@ public class Main {
     frame.pack();
     frame.setLocationRelativeTo(null);
     frame.setVisible(true);
+    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
   }
 }
