@@ -76,6 +76,14 @@ Use `./build.sh` to build CiCo and `./run.sh` to run it if using the command lin
 2. Enter 12345678910 and click Update.
 
 ## Expected Results
-* Should display that there are too many digits. 
+* Should display that there are too many digits.
+
+## Module 5: Test for closing the application after JFrame is closed
+## Test Steps
+1. Build and run Cico.
+2. Click exit button to close the JFrame.
+
+##Expected Results:
+* Should close the application and display "Clean shutdown".
 
 
