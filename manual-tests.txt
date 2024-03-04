@@ -86,4 +86,25 @@ Use `./build.sh` to build CiCo and `./run.sh` to run it if using the command lin
 ##Expected Results:
 * Should close the application and display "Clean shutdown".
 
+## Module 6: Providing a better asthetic
+## Test Steps
+1. Build and run Cico.
+2. View the main page
+3. Enter 00000000 and click update.
+4. View the login page.
+5. Close out of the program.
+
+##Expected Results:
+* Should appear more in neutral colors
+
+## Module 6: Providing a better asthetic
+## Test Steps
+1. Build and run Cico.
+2. View the main page
+3. Enter 99999999 and click update.
+4. View the error page.
+5. Close out of the program.
+
+##Expected Results:
+* The error page should still be red, but not as bright.  The text should be more readable
 
